@@ -18,7 +18,7 @@
 %% with harvard style bibliographic references
 %% SP 2008/03/01
 
-\documentclass[preprint, 12pt]{elsarticle}
+\documentclass[preprint,12pt]{elsarticle}
 %\documentclass[preprint,12pt,authoryear]{article}
 
 %% Use the option review to obtain double line spacing
@@ -70,8 +70,8 @@
 	\futurelet\reserved@a\@xhline}
 
 %\journal{Expert Systems with Applications}
-%\journal{Engineering Applications of Artificial Intelligence}
 \journal{Neural Networks}
+%\journal{Neural Networks}
 
 %\bibliographystyle{elsarticle-harv}\biboptions{authoryear}
 
@@ -99,7 +99,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{\textbf{One-Step Bayesian example-dependent cost classification{\color{cambios_v2}: The WR-CMLP method}}}
+\title{\textbf{One-Step Bayesian example-dependent cost classification{\color{cambios_v2}: The OsC-MLP method}}}
 
 %% use optional labels to link authors explicitly to addresses:
 \author[label1]{Javier~Mediavilla-Relaño\corref{cor1}}
@@ -119,17 +119,17 @@
 
 Example-dependent cost classification problems are those for which the decision costs not only depend on the true and the attributed classes but also on the sample features. Discriminative algorithms that carry out such classification tasks must include this dependence.
 {\color{cambios_v2}
-Furthermore, the best state-of-the-art methods need to know the decision costs for all the patterns, i.e., they can't solve problems where the decision costs are not available for unseen samples.
+Furthermore, the best state-of-the-art methods, such as Neural Networks, need to know the decision costs for all the patterns, i.e., they can't solve problems where the decision costs are not available for unseen samples.
 }
 
-In this paper, we introduce a {\color{cambios_v2}new} Bayesian principled formulation to solve the above {\color{cambios_v2}limitation} for binary cases with one-step Learning Machines, avoiding the {\color{cambios_v2}drawbacks} that unknown analytical forms of the example-dependent costs create. The formulation is based on defining an artificial likelihood ratio by using the empirically available training classification costs in its definition, proposing a test which does not need the values of the costs for unseen samples. Furthermore, it also includes Bayesian principled rebalancing mechanisms to combat the negative effects of class imbalance. Experimental results support the consistency and effectiveness of the corresponding algorithms.
+In this paper, we introduce a {\color{cambios_v2}new} one-step Bayesian principled formulation to train Neural Networks and solve the above {\color{cambios_v2}limitation} for binary cases, avoiding the {\color{cambios_v2}drawbacks} that unknown analytical forms of the example-dependent costs create. The formulation is based on defining an artificial likelihood ratio by using the empirically available training classification costs in its definition, proposing a test which does not need the values of the costs for unseen samples. Furthermore, it also includes Bayesian principled rebalancing mechanisms to combat the negative effects of class imbalance. Experimental results support the consistency and effectiveness of the corresponding algorithms.
 
 \end{abstract}
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
 
-Imbalance \sep Bregman divergences \sep likelihood ratio \sep informed re-balancing \sep sample emphasis.
+Imbalance \sep Bregman divergences \sep Neural Networks \sep informed re-balancing \sep sample emphasis.
 
 %% PACS codes here, in the form: \PACS code \sep code
 
@@ -189,7 +189,7 @@ The work of Bahnsen and his colleagues \cite{Bahnsen2013, Bahnsen2014b, Bahnsen2
 In summary, to correctly solve EDC classification problems, it is necessary to use principled methods that manage the classification costs and imbalance with the Bayes test. However, the principled methods of the state-of-the-art can only solve those problems where the classification costs are known for all the samples. Our approach solves this issue by learning the classification costs during training, i.e., only need the costs for the training samples.
 }
 
-\section{{\color{cambios_v2}Review of two-step Bayesian formulation for EDC problems}}\label{Section3}
+\section{{\color{cambios_v2}Previous works: Two-step EDC Bayesian formulation}}\label{Section3}
 
 The Bayesian likelihood ratio test for a binary EDC classification problem is 
 \begin{equation}\label{eq:BayesianTest}
@@ -243,7 +243,7 @@ o(\textbf{x}) \underset{D_0}{\overset{D_1}{\gtrless}} \frac{Q_c(\textbf{x}) - 1}
 however, the main disadvantage of this procedure is that the decision costs $c_{ji}(\textbf{x})$ are required as they are included in the ratio $Q_c(\textbf{x})$.
 }
 
-\section{{\color{cambios_v2}The proposed one-step WR-CMLP method}}\label{Section4}
+\section{{\color{cambios_v2}The proposed OsC-MLP method}}\label{Section4}
 
 {\color{cambios_pre_envio}The Bayesian framework can also be used to design a training algorithm that can implicitly learn the decision costs, making them unnecessary in the classification stage. We propose a new}
 decision rule equivalent to \eqref{eq:BayesianTest} that can be obtained from an equivalent problem using a new likelihood ratio test with other likelihoods. 
@@ -447,7 +447,7 @@ When working with imbalanced data, it is necessary to ensure that the training a
 The experimental details of the tested models are the following:
 
 \begin{itemize}
-	\item[--] \textbf{Proposed method}. The Weighting Rebalanced Cost MLP \textbf{WR-CMLP} is based on an MLP architecture that minimizes \eqref{eq:training_cost} with $c_B(t, o)$ being a Bregman Divergence, in this case, the mean squared error (MSE). It classifies the patterns with \eqref{eq:test_final}, which does not require knowing the classification cost $c_{ji}(\textbf{x})$ for the patterns to be classified, which is useful in problems where these costs are not available in the evaluation phase, as it happens in many real problems. To reduce the degradation produced by IB, a neutral rebalancing process is applied by uniformly weighting the samples of each class. The effect of the RI is characterized in Table \ref{tab:Proposed-all-datasets}.
+	\item[--] \textbf{Proposed method}. The One-step Cost MLP \textbf{OsC-MLP} is based on an MLP architecture that minimizes \eqref{eq:training_cost} with $c_B(t, o)$ being a Bregman Divergence, in this case, the mean squared error (MSE). It classifies the patterns with \eqref{eq:test_final}, which does not require knowing the classification cost $c_{ji}(\textbf{x})$ for the patterns to be classified, which is useful in problems where these costs are not available in the evaluation phase, as it happens in many real problems. To reduce the degradation produced by IB, a neutral rebalancing process is applied by uniformly weighting the samples of each class. The effect of the RI is characterized in Table \ref{tab:Proposed-all-datasets}.
 	
 	\item[--] \textbf{Benchmark methods}. The one-step methods proposed by Bahnsen and his colleagues are used as benchmarks. These methods were proposed in \cite{Bahnsen2014b}, \cite{Bahnsen2015} and \cite{Bahnsen2015c}. The methods are: Cost-Sensitive Logistic Regressor \textbf{CSLR}, Cost-Sensitive Decision Tree \textbf{CSDT}, and Cost-Sensitive Random Forest \textbf{CSRF}. Each benchmark applies a different model architecture and learns to solve the cost-sensitive classification problem by training the model to optimize a subrogated loss function that is weighted by the cost policy of each sample, although this procedure is not principled.
 	
@@ -457,14 +457,14 @@ The experimental details of the tested models are the following:
 	
 \end{itemize}
 
-The hyperparameters used for the WR-MLP method are those indicated in \cite{MediavillaRelano2023}. For each Benchmark method, the hyperparameters are those recommended in \cite{Bahnsen2014b}. Table \ref{tab:hyperparameters_nn} shows the resulting hyperparameters for the WR-CMLP model discovered with a 5-fold (100 runs per fold) cross-validation over the 100 partitions. The optimizer of the MLPs is the Root Mean Square Propagation, RMSProp. An extra column with the size of the hidden layer of the WR-MLP method proves that integrating the estimation of the posterior probabilities and costs in a single model requires a higher expressive capacity than only estimating the posterior probabilities. All datasets meet this rule except for MKT because it has a quasi-linear boundary. In HMEQ, the cross-validation indicates that the number of neurons needed is greater than 150, but it is saturated with this value since the number of samples is not enough to train larger networks.
+The hyperparameters used for the WR-MLP method are those indicated in \cite{MediavillaRelano2023}. For each Benchmark method, the hyperparameters are those recommended in \cite{Bahnsen2014b}. Table \ref{tab:hyperparameters_nn} shows the resulting hyperparameters for the OsC-MLP model discovered with a 5-fold (100 runs per fold) cross-validation over the 100 partitions. The optimizer of the MLPs is the Root Mean Square Propagation, RMSProp. An extra column with the size of the hidden layer of the WR-MLP method proves that integrating the estimation of the posterior probabilities and costs in a single model requires a higher expressive capacity than only estimating the posterior probabilities. All datasets meet this rule except for MKT because it has a quasi-linear boundary. In HMEQ, the cross-validation indicates that the number of neurons needed is greater than 150, but it is saturated with this value since the number of samples is not enough to train larger networks.
 
 \begin{table}[htpb]
 	\resizebox{\textwidth}{!}{
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
-			 Method  & Activation & Batch size &    Learning rate    & Momentum & Neurons (WR-CMLP) & Neurons (WR-MLP) \\ \hline
+			 Method  & Activation & Batch size &    Learning rate    & Momentum & Neurons (OsC-MLP) & Neurons (WR-MLP) \\ \hline
 			  MKT    &    Tanh    &     60     & $1.5 \cdot 10^{-4}$ &   0.25   &         2         &        2         \\ \hline
 			  HMEQ   &    ReLU    &    100     &  $4 \cdot 10^{-4}$  &   0.02   &        150        &       150        \\ \hline
 			  CS1    &    ReLU    &     80     &  $8 \cdot 10^{-3}$  &   0.02   &        15         &        10        \\ \hline
@@ -472,7 +472,7 @@ The hyperparameters used for the WR-MLP method are those indicated in \cite{Medi
 			  CCF    &    ReLU    &     50     &  $5 \cdot 10^{-4}$  &   0.0    &        90         &        60        \\ \hline
 			IEEE-CIS &    ReLU    &     40     & $2.5 \cdot 10^{-4}$ &   0.0    &        25         &        20        \\ \hline
 		\end{tabular}}
-	\caption{\centering{Hyperparameters of the Neural Networks used for the proposed method.}}
+	\caption{\centering{Hyperparameters of the Neural Networks used for the proposed OsC-MLP method.}}
 	\label{tab:hyperparameters_nn}
 \end{table}
 
@@ -512,7 +512,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em} 
 			\multicolumn{3}{|c|}{MKT}           \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSDT): 47.3 $\pm$ 0.0}                                                              \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
 			\centering{0.5}                                                      & \textit{49.1 $\pm$ 0.4} & \textit{49.0 $\pm$ 0.4} \\ \hline
 			\centering{1 (Full RB)}                                              & \textbf{49.2 $\pm$ 0.4} & \textit{49.1 $\pm$ 0.4} \\ \hline
 			\centering{2}                                                        & \textit{49.1 $\pm$ 0.4} & \textbf{49.2 $\pm$ 0.5} \\ \hline
@@ -524,7 +524,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em} 
 			\multicolumn{3}{|c|}{CS1}           \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSRF): 48.5 $\pm$ 1.4}                                                              \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
 			\centering{1 (Full RB)}                                              & 50.5 $\pm$ 0.5          & \textit{50.6 $\pm$ 0.9} \\ \hline
 			\centering{2}                                                        & \textbf{50.7 $\pm$ 0.1} & \textit{50.6 $\pm$ 0.8} \\ \hline
 			\centering{4}                                                        & \textbf{50.7 $\pm$ 0.1} & \textbf{50.7 $\pm$ 0.9} \\ \hline
@@ -536,7 +536,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em}  
 			\multicolumn{3}{|c|}{CCF}          \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSRF-OS): 72.6 $\pm$ 2.4}                                                           \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
 			\centering{1 (Full RB)}                                              & \textit{76.6 $\pm$ 1.7} & \textit{76.5 $\pm$ 1.7} \\ \hline
 			\centering{2}                                                        & \textit{76.9 $\pm$ 2.0} & \textit{77.0 $\pm$ 2.0} \\ \hline
 			\centering{4}                                                        & \textbf{77.1 $\pm$ 2.2} & \textit{77.3 $\pm$ 2.2} \\ \hline
@@ -552,7 +552,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em} 
 			\multicolumn{3}{|c|}{HMEQ}          \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSDT): 64.8 $\pm$ 0.0}                                                              \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
 			\centering{1 (Full RB)}                                              & 73.0 $\pm$ 1.5          &     73.9 $\pm$ 1.7      \\ \hline
 			\centering{2}                                                        & \textit{74.7 $\pm$ 1.6} & \textit{74.7 $\pm$ 1.7} \\ \hline
 			\centering{4  (Orig IB)}                                             & \textbf{75.3 $\pm$ 1.6} & \textbf{75.9$\pm$ 1.7}  \\ \hline
@@ -564,7 +564,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em} 
 			\multicolumn{3}{|c|}{CS2}           \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSDT): 28.2 $\pm$ 0.0}                                                              \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
 			\centering{0.25}                                                     & \textit{30.9 $\pm$ 0.5} &     30.4 $\pm$ 0.8      \\ \hline
 			\centering{0.5}                                                      & \textit{31.3 $\pm$ 0.5} & \textit{31.0 $\pm$ 0.7} \\ \hline
 			\centering{1  (Full RB)}                                             & \textbf{31.4 $\pm$ 0.6} & \textit{31.3 $\pm$ 0.7} \\ \hline
@@ -576,7 +576,7 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\specialrule{.2em}{.1em}{.1em} 
 			\multicolumn{3}{|c|}{IEEE-CIS}      \\ \hline
 			\multicolumn{3}{|c|}{Best benchmark (CSRF): 23.4 $\pm$ 2.1}                                                              \\ \hline
-			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         WR-CMLP         \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
 			\centering{1 (Full RB)}                                              & \textit{25.2 $\pm$ 2.8} & \textit{29.0 $\pm$ 2.6} \\ \hline
 			\centering{2}                                                        & \textit{26.2 $\pm$ 2.8} & \textbf{29.5 $\pm$ 2.6} \\ \hline
 			\centering{4}                                                        & \textbf{26.1 $\pm$ 2.7} & \textit{29.4 $\pm$ 2.7} \\ \hline
@@ -585,13 +585,13 @@ Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT,
 			\centering{\mbox{29.4 (Orig IB)}}                                    & 22.8 $\pm$ 2.7          &     25.9 $\pm$ 2.9      \\ \hline
 		\end{tabular}}
 	\end{minipage}
-	\caption{\centering{Test Savings (average of the mean results of each partition $\pm$ average of the standard deviations of the results of each partition, in \%) for all the databases using WR-MLP and proposed method with several rebalance intensities}.}
+	\caption{\centering{Test Savings (average of the mean results of each partition $\pm$ average of the standard deviations of the results of each partition, in \%) for all the databases using WR-MLP and proposed OsC-MLP method with several rebalance intensities}.}
 	\label{tab:Proposed-all-datasets}
 \end{table}
 
-The proposed method WR-CMLP upgrades the performance of the best benchmark for all the tested datasets, by advantage of 4\% $-$1.9 of Savings$-$ on MKT, by 17.1\% $-$11.1 of Savings$-$ on HMEQ, by 4.5\% $-$2.2 of Savings$-$ on CS1, with a distance of 11.3\% $-$3.2 of Savings$-$ on CS2, by 6.6\% $-$4.8 of Savings$-$ on CCF, and by 26.1\% $-$6.1 of Savings$-$ on IEEE-CIS. Also, despite the disadvantage of not knowing the prediction example-dependent costs, the WR-CMLP method matches the results of the informed WR-MLP method for all the datasets, except for IEEE-CIS where the proposed method even upgrades the performance of the WR-MLP method by 13\% $-$3.4 of Savings$-$. All the mentioned advantages are statistically significant since the differences are higher than the standard deviation value. The MKT, CS1, CS2, CCF, and IEEE-CIS datasets get an advantage when rebalancing the problem with a fixed RI value. However, HMEQ gets the maximum results when no rebalance is applied.
+The proposed method OsC-MLP upgrades the performance of the best benchmark for all the tested datasets, by advantage of 4\% $-$1.9 of Savings$-$ on MKT, by 17.1\% $-$11.1 of Savings$-$ on HMEQ, by 4.5\% $-$2.2 of Savings$-$ on CS1, with a distance of 11.3\% $-$3.2 of Savings$-$ on CS2, by 6.6\% $-$4.8 of Savings$-$ on CCF, and by 26.1\% $-$6.1 of Savings$-$ on IEEE-CIS. Also, despite the disadvantage of not knowing the prediction example-dependent costs, the OsC-MLP method matches the results of the informed WR-MLP method for all the datasets, except for IEEE-CIS where the proposed method even upgrades the performance of the WR-MLP method by 13\% $-$3.4 of Savings$-$. All the mentioned advantages are statistically significant since the differences are higher than the standard deviation value. The MKT, CS1, CS2, CCF, and IEEE-CIS datasets get an advantage when rebalancing the problem with a fixed RI value. However, HMEQ gets the maximum results when no rebalance is applied.
 
-To assess the statistical significance of the results obtained with the proposed method against the benchmark methods, Table \ref{tab:TTestWilcoxon} shows the result of two statistical tests that are commonly used to compare two classifiers, the paired T-test and the Wilcoxon signed-ranks test \cite{Demsar2006}. The $p$-value and the result of the hypothesis that the mean difference between two sets of observations is not zero for a statistical significance of 5\% are presented in a paired comparison of every benchmark method against the proposed WR-CMLP method. It can be seen that the hypothesis is true for all methods in both the T-test and the Wilcoxon test.
+To assess the statistical significance of the results obtained with the proposed method against the benchmark methods, Table \ref{tab:TTestWilcoxon} shows the result of two statistical tests that are commonly used to compare two classifiers, the paired T-test and the Wilcoxon signed-ranks test \cite{Demsar2006}. The $p$-value and the result of the hypothesis that the mean difference between two sets of observations is not zero for a statistical significance of 5\% are presented in a paired comparison of every benchmark method against the proposed OsC-MLP method. It can be seen that the hypothesis is true for all methods in both the T-test and the Wilcoxon test.
 
 \begin{table}[htpb]
 	\begin{center}
@@ -616,7 +616,7 @@ To assess the statistical significance of the results obtained with the proposed
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{T-Test and Wilcoxon signed ranked test ($p$-Values and Hypothesis) of the proposed method against each one of the benchmark methods.}
+	\caption{\centering{T-Test and Wilcoxon signed ranked test ($p$-Values and Hypothesis) of the proposed OsC-MLP method against each one of the benchmark methods.}}
 	\label{tab:TTestWilcoxon}
 \end{table}
 
@@ -632,7 +632,7 @@ A multiple model comparison has also been performed between the proposed method 
 		\foreach \x in{0,1,...,4}{
 			\draw[thin] (\x,0.2) -- (\x,-0.2) node[below] {$\x$};
 		}
-		\foreach \y/\x/\nombre in{0/3.0/Proposed, 
+		\foreach \y/\x/\nombre in{0/3.0/OsC-MLP, 
 			1/1.5833/CSDT$^\ast$,
 			2/1.4167/CSRF$^\ast$
 		}
@@ -642,7 +642,7 @@ A multiple model comparison has also been performed between the proposed method 
 		}
 		\end{tikzpicture}
 	\end{center}
-	\caption{Average means of ranks for the 3 methods in a Friedman test  (better models: on the right). The standard deviation in the pairwise comparison is included.}
+	\caption{\centering{Average means of ranks for the 3 methods in a Friedman test  (better models: on the right). The standard deviation in the pairwise comparison is included.}}
 	\label{fig:FriedmanTest}
 \end{figure}
 
@@ -651,8 +651,8 @@ A multiple model comparison has also been performed between the proposed method 
 		\begin{tabular}{c|ccc}
 			\hline\hline
 			\begin{tabular}{@{}c@{}}Type of\\ Critical\\ Value\end{tabular} 
-  & \begin{tabular}{@{}c@{}}Proposed\\ vs\\ CSDT$^\ast$\end{tabular} 
-  & \begin{tabular}{@{}c@{}}Proposed\\ vs\\ CSRF$^\ast$\end{tabular}
+  & \begin{tabular}{@{}c@{}}OsC-MLP\\ vs\\ CSDT$^\ast$\end{tabular} 
+  & \begin{tabular}{@{}c@{}}OsC-MLP\\ vs\\ CSRF$^\ast$\end{tabular}
   & \begin{tabular}{@{}c@{}}CSDT$^\ast$ \\vs\\ CSRF$^\ast$ \end{tabular}
  \\ \hline
 			       Tukey's         &         0.0323          &         0.0141          &           0.9532           \\
@@ -661,7 +661,7 @@ A multiple model comparison has also been performed between the proposed method 
 			         LSD           &         0.0122          &         0.0051          &           0.7681           \\ \hline\hline
 		\end{tabular}
 	\end{center}
-	\caption{$p$-values of the statistics of the Friedman test in a multiple model comparison using different types of critical values.}
+	\caption{\centering{$p$-values of the statistics of the Friedman test in a multiple model comparison using different types of critical values.}}
 	\label{tab:pValuesFriedman}
 \end{table}
 
@@ -670,11 +670,11 @@ A multiple model comparison has also been performed between the proposed method 
 {\color{cambios_v2}
 As introduced in Section \ref{Section2}, the state-of-the-art methods that achieve the best performance in EDC classification problems use principled procedures that manage the classification costs and imbalance with the Bayes test. However, these methods present an important imitation as they need to know the decision costs for unseen samples. 
 
-We have presented the WR-CMLP method, a one-step procedure that also manages the classification costs and imbalance with the Bayes test, but with a modified formulation to learn the decision costs during the training phase, i.e., only need the costs for the training samples, solving the main limitation of the state-of-the-art alternatives. The WR-CMLP method works with an auxiliary likelihood ratio which includes the training example dependent costs, as well as principled rebalancing mechanisms that use neutral procedures under Bregman surrogate training costs. Therefore, we not only can classify new samples without knowing or estimating the corresponding decision costs but the negative effects of any kind of imbalance can be appropriately controlled.
+We have presented the OsC-MLP method, a one-step procedure that also manages the classification costs and imbalance with the Bayes test, but with a modified formulation to learn the decision costs during the training phase, i.e., only need the costs for the training samples, solving the main limitation of the state-of-the-art alternatives. The OsC-MLP method works with an auxiliary likelihood ratio which includes the training example dependent costs, as well as principled rebalancing mechanisms that use neutral procedures under Bregman surrogate training costs. Therefore, we not only can classify new samples without knowing or estimating the corresponding decision costs but the negative effects of any kind of imbalance can be appropriately controlled.
 }
 
-A set of experiments with real datasets has shown that the proposed WR-CMLP method obtains better results than the one-step benchmark methods, which do not require the decision costs to evaluate a pattern. Moreover, the WR-CMLP is able of achieving the performance of informed methods, which need the decision costs for patterns at the evaluation stage. This is a significant result because these costs are not available during the evaluation phase for previously unseen patterns in many real applications. {\color{cambios_v2}
-However, since the proposed WR-CMLP method uses Neural Networks as an estimator, the proposal has its same drawbacks. Although neural networks offer excellent estimation capabilities, they also have some limitations: Difficulties with datasets with linear decision boundaries; As a "black-box" model, it is complex to explain its decisions; And finally, large datasets are needed to train models with high expressive capacity. Such as in the HMEQ dataset, where the number of neurons was limited to 150 due to the amount of available data.
+A set of experiments with real datasets has shown that the proposed OsC-MLP method obtains better results than the one-step benchmark methods, which do not require the decision costs to evaluate a pattern. Moreover, the OsC-MLP is able of achieving the performance of informed methods, which need the decision costs for patterns at the evaluation stage. This is a significant result because these costs are not available during the evaluation phase for previously unseen patterns in many real applications. {\color{cambios_v2}
+However, since the proposed OsC-MLP method uses Neural Networks as an estimator, the proposal has its same drawbacks. Although neural networks offer excellent estimation capabilities, they also have some limitations: Difficulties with datasets with linear decision boundaries; As a "black-box" model, it is complex to explain its decisions; And finally, large datasets are needed to train models with high expressive capacity. Such as in the HMEQ dataset, where the number of neurons was limited to 150 due to the amount of available data.
 }
 
 At present, we are working on including sample emphasis mechanisms to improve the performance of these algorithms.
@@ -683,7 +683,7 @@ At present, we are working on including sample emphasis mechanisms to improve th
 
 In memoriam of An\'ibal R. Figueiras-Vidal, who passed away recently. Prof. Figueiras-Vidal collaborated actively with the authors for several years, and we want to recognize his contribution: An important part of this work is due to his contribution and guidance.
 
-This work has been partially supported by Grant PID2021-125652OB (ML-SAM) funded by the Spanish MCIN/AEI/10.13039/501100011033 and by ``ERDF A way of making Europe''. 
+This work has been partially supported by Grant PID2021-125652OB (ML-SAM) of the Spanish Ministry of Science and Innovation.
 
 \vskip 0.2in
 %\bibliographystyle{elsarticle-harv}\biboptions{authoryear}
