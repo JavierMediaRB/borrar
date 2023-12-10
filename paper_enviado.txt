@@ -1,0 +1,698 @@
+%% 
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%% SP 2008/03/01
+
+\documentclass[preprint,12pt]{elsarticle}
+%\documentclass[preprint,12pt,authoryear]{article}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{scalerel}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{ctable}
+
+
+%\usepackage{slashbox}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+
+\colorlet{cambios_pre_envio}{black}%{blue}
+\colorlet{colorMarce}{black}%{red}
+\colorlet{cambios_v2}{black}%{applegreen}
+
+\newcommand{\argmin}{\arg\!\min}
+\newcommand\size{0.95}
+
+\def\hlinewd#1{%
+	\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+	\futurelet\reserved@a\@xhline}
+
+%\journal{Expert Systems with Applications}
+\journal{Neural Networks}
+%\journal{Neural Networks}
+
+%\bibliographystyle{elsarticle-harv}\biboptions{authoryear}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{\textbf{One-Step Bayesian example-dependent cost classification{\color{cambios_v2}: The OsC-MLP method}}}
+
+%% use optional labels to link authors explicitly to addresses:
+\author[label1]{Javier~Mediavilla-Relaño\corref{cor1}}
+\cortext[cor1]{Corresponding author. Tel.: +34 677995010}
+\ead{javiermedia@tsc.uc3m.es}
+%% \author[label1,label2]{}
+%% \address[label1]{}
+%% \address[label2]{}
+
+\author[label1]{Marcelino L\'azaro}
+\ead{mlazaro@tsc.uc3m.es}
+
+\address[label1]{Signal Theory and Communications Department, Universidad Carlos III de Madrid, Avda. de la Universidad, No. 30, 28911, Legan\'es, Madrid, Spain.}
+
+\begin{abstract}
+
+
+Example-dependent cost classification problems are those for which the decision costs not only depend on the true and the attributed classes but also on the sample features. Discriminative algorithms that carry out such classification tasks must include this dependence.
+{\color{cambios_v2}
+Furthermore, the best state-of-the-art methods, such as Neural Networks, need to know the decision costs for all the patterns, i.e., they can't solve problems where the decision costs are not available for unseen samples.
+}
+
+In this paper, we introduce a {\color{cambios_v2}new} one-step Bayesian principled formulation to train Neural Networks and solve the above {\color{cambios_v2}limitation} for binary cases, avoiding the {\color{cambios_v2}drawbacks} that unknown analytical forms of the example-dependent costs create. The formulation is based on defining an artificial likelihood ratio by using the empirically available training classification costs in its definition, proposing a test which does not need the values of the costs for unseen samples. Furthermore, it also includes Bayesian principled rebalancing mechanisms to combat the negative effects of class imbalance. Experimental results support the consistency and effectiveness of the corresponding algorithms.
+
+\end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+Imbalance \sep Bregman divergences \sep Neural Networks \sep informed re-balancing \sep sample emphasis.
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}\label{introduction}
+
+Example Dependent Cost (EDC) classification problems are those in which the classification costs do not only depend on the decided and true classes but also on the observation values. They appear in many and diverse application fields such as intrusion detection \cite{Ma2011}, optical flow \cite{Mac2012}, plankton biomass estimation \cite{Gonzalez2013} and tire changes \cite{Gunnemann2017}, and are very frequent in Health and, in particular, in Business and Finance: Credit scoring \cite{Bahnsen2014b, Verbraken2014, Abellan2017}, customer attrition \cite{Wong2005, Ngai2009, Bahnsen2015b, Jafari2020}, and fraud detection \cite{Panigrahi2009, Bhattacharyya2011, DalPozzolo2014, Abdallah2016, Nami2018}. These representative examples make evident the importance of the subject. In addition, \cite{vanderschueren2022} presents a more complete review of this field.
+
+EDC classification problems are a family of classification problems that can be called singular. This means that the use of conventionally designed Learning Machines (LMs) will produce unsatisfactory results in most cases, due to the effects of the EDCs. Additionally, imbalance (IB) is also present in a high proportion of these problems. A classification problem suffers from IB when its populations and/or cost policy are so different that there are some classes $-$in binary situations, the minority class$-$ that are difficult to detect. We will not fully discuss this subject here, except for a particular procedure; therefore, we recommend to the interested reader tutorials \cite{Krawczyk2016, Lopez2013, Haixiang2017} and a mono-graphic book \cite{fernandez2018learning}.
+
+In response to the practical interest in EDC classification problems, a considerable number of procedures have been proposed to address them. However, most of these procedures (see Section 2) are empirical, and, consequently, they can offer poor results for particular problems and, even worse, they also can suffer degradation and become inferior to conventional approaches. {\color{cambios_pre_envio}In \cite{MediavillaRelano2023} we proposed a two-step procedure $-$a first step estimates the class posterior probabilities (using an LM), the second selects the class to which the sample is assigned by minimizing the corresponding posterior cost$-$ for binary problems. It was a principled solution, built on the Bayesian formulation, which was successfully tested in a variety of real problems.
+%
+The two-step procedures, although relatively common in the literature, have a practical limitation: They require knowing the classification costs in the evaluation step. In some real applications, the determination of the classification costs is empirical or requires the participation of an expert, and thus does not allow the implementation of the second step for unseen samples. Constructing additional LMs to estimate these costs for each new sample is an alternative which would introduce some imprecision.} 
+
+To overcome this drawback, we propose a principled one-step method based on the Bayesian formulation that implicitly learns the decision costs in the training stage, making them unnecessary in the evaluation phase. It also considers a rebalancing process, proposed in \cite[Section~6]{BenitezBuenache2019}, and applies the rebalancing techniques presented in \cite{BenitezBuenache2021} to deal with the imbalance. Its performance is compared with those of previous one-step methods and with that of the principled two-step procedure \cite{MediavillaRelano2023}, showing very satisfactory results.
+
+The rest of the paper is organized as follows. Section \ref{Section2} is a concise overview of previous related works on EDC classification. {\color{cambios_v2}The Section \ref{Section3} presents the Bayesian formulation for EDC problems. The proposed one-step method is introduced in Section \ref{Section4}}. Section \ref{Section5}, is dedicated to the experiments and their discussion. Finally, the conclusions of this work and a mention of some future research emerging from it close the article.
+
+\section{Related works}\label{Section2}
+
+In this section we review previous related works, focusing especially on EDC classification and the use of the Bayesian formulation in the design of LMs. {\color{cambios_pre_envio}The main differences with the proposed method are discussed, which helps to highlight the contribution of this work}.
+
+\subsection{Sampling methods}
+
+The first procedures that were proposed to deal with EDC classification used proportional oversampling according to the cost policy \cite{Elkan2001, Zadrozny2003}. Independently of the risks that are associated with resampling techniques (losing critical samples or emphasizing irrelevant instances, or even outliers), this approach, as well as the equivalent weighting of samples, are intuitively satisfactory and easy to apply. However, we will see in Section \ref{Section3} that these modifications are not enough to constitute a principled method. In our approach, {\color{cambios_pre_envio} the cost policy is managed using the Bayesian formulation, and sampling is considered solely as a mechanism to deal with the imbalance in a principled way (in combination with the parameters of the Bayes cost)}. 
+
+\subsection{Cost-sensitive methods}
+
+Several works have introduced the cost policy in the construction of the classifier. The design of decision trees can consider the decision costs, as in \cite{Ting2002, Wysotzki2009}. Similar designs of standard LMs, as well as statistical approaches, are presented in \cite{Geibel2004, Olszewski2014, Mahmoudi2015, Vosough2015}. Modified versions of boosting ensembles \cite{Nikolaou2016, Xia2017, Zelenkov2019}, and Support Vector Machines \cite{Brefeld2003, Gonzalez2013}, even with a principled reformulation \cite{Iranmehr2019}, have been developed to exploit the high performance of these schemes. Temporal versions have been designed by data preprocessing \cite{Jha2012} or LM structures and their training \cite{Fashoto2016, Nami2018, Robinson2018}. 
+%
+Most of the above algorithms are not principled, and consequently, they suffer risks of offering poor performance in some situations. Moreover, most of these methods do not take into account the imbalance or face it with non-principled sampling methods (with the known degradation risks) {\color{cambios_v2} \cite{BenitezBuenache2021}}. 
+%
+In our approach, the cost policy is considered in the construction of the LM using the solid Bayesian theory, which allows us to deal simultaneously with the classification costs and with the imbalance. We have chosen a neural network as LM because {\color{cambios_pre_envio} these networks allow us to apply the Bayesian formulation to design a training algorithm able to implicitly learn the classifications costs}. Moreover, sampling can also be introduced in a principled way to overcome the imbalance.
+
+\subsection{Use of the Bayes theory}
+
+The Bayes classification theory has been used in the context of machine learning to build cost-sensitive methods in several different ways. Estimates of the Bayes average cost have been proposed as the loss function to be minimized during the training, as in \cite{Lazaro2021} where the Parzen windows method was used to estimate the class probabilities from the training set. Some other approaches use the output of an LM to estimate the class probabilities in the first step of two-step methods. In the second step, these estimates are used to select the Bayesian solution (the decision minimizing the average posterior cost). 
+%
+Bahnsen and his colleagues \cite{Bahnsen2013, Bahnsen2014b,Bahnsen2014, Bahnsen2015, Bahnsen2015b, Bahnsen2016} proposed several two-step methods. However, the procedures proposed to estimate the posterior class probabilities were not principled, and they do not guarantee consistent estimates. In practice, heuristic calibration procedures are used to improve the performance \cite{Bahnsen2014b}, but this reduces the robustness of these approaches, as shown in \cite{MediavillaRelano2023}. Consistent estimates of the class probabilities can be obtained by principled methods, such as the proposed in \cite{BenitezBuenache2019, BenitezBuenache2021} using the Bayesian theoretical framework. This framework has been extended to different applications, such as two-step EDC methods \cite{MediavillaRelano2023} or \cite{GutierrezLopez2023}, where the formulation is extended to use asymmetric switching in the construction of ensembles.
+%
+In any case, the two step-methods have the drawback of requiring the classification costs in the second step to classify a given pattern, and this information is not available in some applications. {\color{cambios_pre_envio}To solve this issue, our} approach uses the Bayesian theoretical framework proposed in \cite{BenitezBuenache2019, BenitezBuenache2021} to design a principled one-step method where the classification costs are implicitly learnt during training {\color{cambios_pre_envio}, i.e., our approach can solve problems where the classification costs are not available for unseen samples.}
+
+\subsection{One-step EDC methods}
+
+The work of Bahnsen and his colleagues \cite{Bahnsen2013, Bahnsen2014b, Bahnsen2014, Bahnsen2015, Bahnsen2015b, Bahnsen2016} also proposed several one-step algorithms that include the costs policy to design the corresponding LM classifier, such as the Cost-Sensitive Logistic Regressor (CSLR), the Cost-Sensitive Decision Tree (CSDT), and the Cost-Sensitive Random Forest (CSRF). These methods have an empirical design, and thus performance limitations and other risks. Here we will present a one-step method based on the Bayesian principled formulation, having an EDC classifier that does not suffer from these drawbacks.
+
+{\color{cambios_pre_envio}
+In summary, to correctly solve EDC classification problems, it is necessary to use principled methods that manage the classification costs and imbalance with the Bayes test. However, the principled methods of the state-of-the-art can only solve those problems where the classification costs are known for all the samples. Our approach solves this issue by learning the classification costs during training, i.e., only need the costs for the training samples.
+}
+
+\section{{\color{cambios_v2}Previous works: Two-step EDC Bayesian formulation}}\label{Section3}
+
+The Bayesian likelihood ratio test for a binary EDC classification problem is 
+\begin{equation}\label{eq:BayesianTest}
+r(\textbf{x}) = \frac{p(\textbf{x}|C_1)}{p(\textbf{x}|C_0)} \underset{D_0}{\overset{D_1}{\gtrless}} \frac{c_{10}(\textbf{x}) - c_{00}(\textbf{x})}{c_{01}(\textbf{x}) - c_{11}(\textbf{x})} \thickspace \frac{\textrm{P}_0}{\textrm{P}_1} = {\color{cambios_v2}Q_c(\textbf{x}) Q_{\textrm{P}}}
+\end{equation}
+where $\textbf{x}$ is the observation or pattern to be classified, $C_i, \thickspace i \in \{0,1\}$, the classes, $p(\textbf{x}|C_i)$ the class $C_i$ likelihood,  and $r(\textbf{x})$ the likelihood ratio. 
+%
+The {ratio \color{cambios_v2}$Q_{\textrm{P}}$} depends on the prior probability of the classes ($\textrm{P}_i$ denotes the prior for $C_i$), and the {ratio \color{cambios_v2}$Q_c(\textbf{x})$ depends on the} decision costs $c_{ji}(\textbf{x}), \thickspace i,j \in \{0,1\}$, denoting the cost of deciding $C_j$ when the true class is $C_i$. Finally, the decision is based on the comparison of the likelihood ratio $r(\textbf{x})$ with threshold {\color{cambios_v2} $Q_c(\textbf{x}) Q_{\textrm{P}}$}, where $D_i$ means to attribute $\textbf{x}$ to the class $C_i$.
+
+The likelihood ratio is related to the posterior probability of class $C_1$ (we assume that $C_1$ is the minority class). 
+%
+{\color{cambios_v2} Taking into account that $Q_{\textrm{P}} = \textrm{P}_0 / \textrm{P}_1$}
+
+\begin{equation}\label{eq:Posterior_prob}
+	\textrm{Pr}(C_1|\textbf{x}) = \frac{p(\textbf{x}|C_1) \textrm{P}_1}{p(\textbf{x}|C_1) \textrm{P}_1 + p(\textbf{x}|C_0) \textrm{P}_0} = \frac{1}{1 + Q_{\textrm{P}}/r(\textbf{x})}
+\end{equation}
+and therefore
+\begin{equation}\label{eq:likelihood_ratio}
+		 {r}(\textbf{x}) = {Q}_{\textrm{P}} \thickspace \frac{{\textrm{Pr}}(C_1|\textbf{x})}{1 - {\textrm{Pr}}(C_1|\textbf{x})}
+\end{equation}
+% 
+This relationship has been exploited to make use of LMs to obtain principled estimates of the likelihood ratio by using Bregman divergences as the cost function to be minimized during the training of an LM. 
+%
+Bregman divergences are those cost functions $c_B(t, o)$ that satisfy
+\begin{equation}\label{eq:Derivada_O}
+\frac{\partial{c_B(t,o)}}{\partial{o}} = -g(o)(t-o)
+\end{equation}
+where $t$ is the target, $o$ the output of the LM, and $g(\cdot)$ an arbitrary positive function. 
+An LM, with parameters $\textbf{w}$ and with $o(\textbf{x}, \textbf{w})$ denoting its output to pattern $\textbf{x}$, can be trained to minimize a cost function based on a Bregman divergence and computed through a training set of $N$ labelled samples
+\begin{equation}\label{eq:CostFunctionBregman}
+    J(\textbf{w}) = \sum_{k=1}^{N} c_B(t_k,o(\textbf{x}_k, \textbf{w}))
+\end{equation}
+where $t_k$ is the target value for pattern $\textbf{x}_k$, with $t_k=+1$ for patterns of class $C_1$ and $t_k=-1$ for patterns of class $C_0$. The result of the training phase is the set of optimal parameters for the LM, $\textbf{w}=\textbf{w}^{\ast}$, those minimizing the cost function $J(\textbf{w})$. Once the LM is trained, to simplify the notation, the dependence of its output concerning the optimal weights will be made implicit, i.e., $o(\textbf{x})\equiv o(\textbf{x},\textbf{w}^{\ast})$. The output of the LM trained to minimize \eqref{eq:CostFunctionBregman} provides a consistent estimate of the posterior probability of $C_1$ as
+\begin{equation}\label{eq:Pr_estimated}
+\widehat{\textrm{Pr}}(C_1|\textbf{x}) = \frac{1 + o(\textbf{x})}{2}
+\end{equation}
+Proofs of the above can be found both in \cite{Bregman67} and \cite{BenitezBuenache2019}, or, in more general contexts, in \cite{Cid99, Cid2001}. 
+%
+From \eqref{eq:likelihood_ratio}, this estimate can be used to obtain an estimate of the likelihood ratio
+\begin{equation}\label{eq:likelihood_ratioEst}
+		 \widehat{r}(\textbf{x}) = \widehat{Q}_{\textrm{P}} \thickspace \frac{\widehat{\textrm{Pr}}(C_1|\textbf{x})}{1 - \widehat{\textrm{Pr}}(C_1|\textbf{x})}  = \widehat{Q}_{\textrm{P}} \thickspace \frac{1 + o(\textbf{x})}{1 - o(\textbf{x})}
+\end{equation}
+where ${Q}_{\textrm{P}}$ can be estimated from the populations rate in the training set $\widehat{Q}_{\textrm{P}}=N_0/N_1$ ($N_i$ denotes the number of samples of class $C_i$ in the training set. Obviously, $N=N_0+N_1$). {\color{cambios_pre_envio}As in \cite{BenitezBuenache2021} or in \cite{MediavillaRelano2023},} this estimated likelihood ratio can be used, along with the decision rule \eqref{eq:BayesianTest}, 
+{\color{cambios_v2}
+to classify new patterns with \eqref{eq:decision_rule_IB_EDC} in case of not applying any rebalancing processes
+
+\begin{equation}\label{eq:decision_rule_IB_EDC}
+o(\textbf{x}) \underset{D_0}{\overset{D_1}{\gtrless}} \frac{Q_c(\textbf{x}) - 1}{Q_c(\textbf{x}) + 1}
+\end{equation}
+%
+however, the main disadvantage of this procedure is that the decision costs $c_{ji}(\textbf{x})$ are required as they are included in the ratio $Q_c(\textbf{x})$.
+}
+
+\section{{\color{cambios_v2}The proposed OsC-MLP method}}\label{Section4}
+
+{\color{cambios_pre_envio}The Bayesian framework can also be used to design a training algorithm that can implicitly learn the decision costs, making them unnecessary in the classification stage. We propose a new}
+decision rule equivalent to \eqref{eq:BayesianTest} that can be obtained from an equivalent problem using a new likelihood ratio test with other likelihoods. 
+%
+{\color{cambios_pre_envio} By defining %$d_i(\textbf{x}) = c_{ji}(\textbf{x}) - c_{ii}(\textbf{x})$, 
+\begin{equation}\label{eq:decisions_dif}
+    d_i(\textbf{x}) = c_{ji}(\textbf{x}) - c_{ii}(\textbf{x})
+\end{equation}
+the likelihood ratio} (\ref{eq:BayesianTest}) becomes
+\begin{equation}\label{eq:BayesianTestModif}
+\frac{d_1(\textbf{x}) p(\textbf{x}|C_1)}{d_0(\textbf{x}) p(\textbf{x}|C_0)} \underset{D_0}{\overset{D_1}{\gtrless}} Q_{\textrm{P}}
+\end{equation}
+%
+Now the equivalent problem is obvious by defining the following likelihoods
+\begin{equation}\label{eq:EquivalentLikelihood}
+	p_{\textrm{E}}(\textbf{x}|C_i) = \frac{d_i(\textbf{x}) p(\textbf{x}|C_i)} {a_i}, \thickspace \thickspace i \in \{0,1\}
+\end{equation}
+where $a_i$ is a normalization constant to force unity likelihood volume
+\begin{equation}\label{eq:IntegralVolumeLikelihood}
+	\int_{\textbf{x}} p_{\textrm{E}}(\textbf{x}|C_i) \thickspace d\textbf{x} = \frac{1}{a_i} \int_{\textbf{x}} d_i(\textbf{x}) p(\textbf{x}|C_i) \thickspace d\textbf{x} = 1
+\end{equation}
+%
+This equivalent problem has the likelihood ratio test 
+\begin{equation}\label{eq:EquivalentBayesianTest}
+r_{\textrm{E}}(\textbf{x}) = \frac{p_{\textrm{E}}(\textbf{x}|C_1)}{p_{\textrm{E}}(\textbf{x}|C_0)} \underset{D_0}{\overset{D_1}{\gtrless}} Q_{\textrm{P}} \thickspace \frac{a_0}{a_1} = Q_{\textrm{E}}
+\end{equation}
+and its decisions are the solution of the EDCs classification, because the decisions of rule \eqref{eq:BayesianTest} are equivalent to the decisions of rule \eqref{eq:EquivalentBayesianTest}.
+%M
+{\color{cambios_pre_envio}Note that, unlike the decision threshold in \eqref{eq:BayesianTest}, {\color{cambios_v2}more specifically the term $Q_c(\textbf{x})$ in this threshold}, the decision threshold $Q_E$ that is associated to the likelihood ratio of the equivalent problem does not depend on the decision costs $c_{ji}(\textbf{x})$, as long as the constants $a_i$ are known.
+%
+In practice, these constants can be estimated from the training set}
+\begin{equation}\label{eq:a_estimation}
+	\widehat{a}_i = \frac{1}{N_i} \sum_{k \in \mathcal{S}_i} d_i(\textbf{x}_k), \thickspace \thickspace i \in \{0,1\}
+\end{equation}
+where
+$\mathcal{S}_i=\{k|\textbf{x}_k \mbox{ of class } C_i\}$ is the set of indexes for samples of class $C_i$, and $N_i$ is the number of examples in this set. 
+%
+The estimate for $Q_{\textrm{E}}$ is obtained as 
+\begin{equation}\label{eq:Qe_estimation}
+\widehat{Q}_{\textrm{E}}=\widehat{Q}_{\textrm{P}}\frac{\widehat{a}_0}{\widehat{a}_1}
+\end{equation}
+
+%
+Now, to obtain an estimate of the posterior probability of class $C_1$ for the equivalent problem from the output of an LM, thus allowing to have an estimate for $r_{\textrm{E}}(\textbf{x})$ equivalent to the estimate for $r(\textbf{x})$ given in \eqref{eq:likelihood_ratioEst} 
+\begin{equation}\label{eq:likelihood_ratioEstEquiv}
+	 \widehat{r}_{\textrm{E}}(\textbf{x}) 
+	 = \widehat{Q}_{\textrm{E}} \thickspace \frac{\widehat{\textrm{Pr}}_{\textrm{E}}(C_1|\textbf{x})}{1 - \widehat{\textrm{Pr}}_{\textrm{E}}(C_1|\textbf{x})}  
+	 = \widehat{Q}_{\textrm{E}} \thickspace \frac{1 + o(\textbf{x})}{1 - o(\textbf{x})}
+\end{equation}
+%
+it is straightforward to see that the cost function to be minimized during the training phase is
+\begin{equation}\label{eq:training_costEquiv}
+	J_{\textrm{E}}(\textbf{w})=\sum_{k \in \mathcal{S}_0} \frac{d_0(\textbf{x}_k)}{\widehat{a}_0} \thickspace
+	c_B(t_k,o(\textbf{x}_k, \textbf{w})) + \sum_{k \in \mathcal{S}_1} \frac{d_1(\textbf{x}_k)}{\widehat{a}_1} \thickspace c_B(t_k,o(\textbf{x}_k, \textbf{w}))
+\end{equation}
+%
+{\color{cambios_pre_envio}Unlike in two-step methods such as \cite{BenitezBuenache2021} or \cite{MediavillaRelano2023}, now 
+the} decision costs for each pattern, $c_{ji}(\textbf{x}_k)$, are included in the training phase, {\color{cambios_pre_envio}specifically in the terms  $d_i(\textbf{x}_k)$, $i\in\{0,1\}$, included in the loss function \eqref{eq:training_costEquiv}}, but they are not required in {\color{cambios_pre_envio}the decision rule} \eqref{eq:EquivalentBayesianTest} to classify a pattern.
+
+Note that the inclusion of the $\widehat{a}_i$ means that it is not enough to weight and/or resample the observations according to $d_i(\textbf{x})$ for class $C_i$, as we anticipated in section \ref{Section2}, except if $\widehat{a}_0 = \widehat{a}_1$ (strictly speaking, $a_0 = a_1$). And note also that although the decision rules \eqref{eq:BayesianTest} and \eqref{eq:EquivalentBayesianTest} are equivalent, unlike in \eqref{eq:BayesianTest}, the test in \eqref{eq:EquivalentBayesianTest} does not include the decision costs on the threshold (right side of the inequality), but it is implicitly included in the likelihood ratio (left side of the inequality), which is now estimated from the output of an LM and therefore these costs have been learned during the training phase.
+
+Since it is frequent to work with intrinsically imbalanced classes and also to include the possible IB effects of the EDCs through the estimated normalization constants, a complete procedure must incorporate a rebalancing mechanism. To keep the Bayesian framework, we propose to apply that presented in \cite{BenitezBuenache2019} {\color{cambios_pre_envio}and further developed }{\color{cambios_v2}in \cite{BenitezBuenache2021}}.  This rebalancing requires:
+\begin{itemize}
+	
+	\item[--] To apply Bregman divergences \cite{Bregman67} as surrogate costs.
+	
+	\item[--] To rebalance in a neutral manner, i.e., without altering the likelihood ratio. This can be done by weighting uniformly all the samples of each class, or, in a statistical sense, by resampling or generating samples also uniformly for all the samples of each class. Ensembles of classifiers with SMOTE \citep{Chawla2002} or Switching \cite{gutierrez2020} are examples of statistically neutral rebalancing techniques.
+
+\end{itemize}
+
+Therefore, the procedure to solve the EDC classification problems from a labelled training set (including the class and decision costs for each available pattern) using a learning machine able of making decisions for new patterns in one step, without requiring the decision costs for these new patterns in the evaluation phase, is as follows:
+
+\begin{itemize}
+	
+	\item[1)] Training Phase: To train an LM by minimizing the cost function for the equivalent problem including rebalance
+	\begin{equation}\label{eq:training_cost}
+	J_{\textrm{ER}}(\textbf{w})=\frac{1}{RI} \sum_{k \in \mathcal{S}_0} \frac{d_0(\textbf{x}_k)}{\widehat{a}_0} \thickspace
+	c_B(t_k,o(\textbf{x}_k, \textbf{w})) + \sum_{k \in \mathcal{S}_1} \frac{d_1(\textbf{x}_k)}{\widehat{a}_1} \thickspace c_B(t_k,o(\textbf{x}_k, \textbf{w}))
+	\end{equation}
+	where
+	$RI$ is a rebalancing intensity which has been found appropriate to compensate for the IB by some searching process. The inclusion of this rebalance term means that the rebalanced problem has an ``apparent'' value for ${Q}_{\textrm{P}}$ (see \cite{BenitezBuenache2021}), and correspondingly an ``apparent'' value for ${Q}_{\textrm{E}}$ 
+	\begin{equation}\label{eq:Q_equivalent}
+		\widetilde{Q}_{\textrm{P}} = \frac {\widehat{Q}_{\textrm{P}}} {RI}
+		, \thickspace  
+		\widetilde{Q}_{\textrm{E}} = \frac {\widehat{Q}_{\textrm{E}}} {RI}
+	\end{equation}
+	%
+
+	\item[2)] Evaluation Phase: For classifying an unseen sample $\textbf{x}$, 
+	an estimate of the likelihood ratio for this equivalent and rebalanced problem, $\widetilde{r}_{\textrm{E}}(\textbf{x})$, must be obtained from the output of the LM trained to minimize $J_{\textrm{ER}}(\textbf{w})$ and $\widetilde{Q}_{\textrm{E}}$ as
+	\begin{equation}\label{eq:likelihood_ratio_E}
+		 \widetilde{r}_{\textrm{E}}(\textbf{x}) = \widetilde{Q}_{\textrm{E}} \thickspace \frac{\widetilde{\textrm{Pr}}_{\textrm{E}}(C_1|\textbf{x})}{1 - \widetilde{\textrm{Pr}}_{\textrm{E}}(C_1|\textbf{x})} = \widetilde{Q}_{\textrm{E}} \thickspace \frac{1 + o(\textbf{x})}{1 - o(\textbf{x})}
+ 	\end{equation}
+ 	
+ 	Since the likelihood ratio is invariant when a neutral rebalance is applied, the final test will be
+ 	\begin{equation}\label{eq:test_Bayes_1}
+ 		\widehat{r}_{\textrm{E}}(\textbf{x}) = \widetilde{r}_{\textrm{E}}(\textbf{x}) \underset{D_0}{\overset{D_1}{\gtrless}} \widehat{Q}_{\textrm{E}}
+ 	\end{equation}
+ 	or, equivalently
+ 	\begin{equation}\label{eq:test_Bayes_1_equivalent}
+ 		\frac{1 + o(\textbf{x})}{1 - o(\textbf{x})} \underset{D_0}{\overset{D_1}{\gtrless}} \frac{\widehat{Q}_{\textrm{E}}}{\widetilde{Q}_{\textrm{E}}}
+ 	\end{equation}
+ 	from which
+ 	\begin{equation}\label{eq:test_final}
+ 		o(\textbf{x}) \underset{D_0}{\overset{D_1}{\gtrless}} \frac{\widehat{Q}_{\textrm{E}} - \widetilde{Q}_{\textrm{E}}}{\widehat{Q}_{\textrm{E}} + \widetilde{Q}_{\textrm{E}}}
+ 	\end{equation}
+
+ 	that does not require the use of the classification costs $c_{ji}(\textbf{x})$: They have been learned by the LM along the training process. Besides, the procedure carries out the rebalance by including the effects of the classification costs.
+\end{itemize}
+
+The likelihood ratio or posterior probability estimates of the true problem, $\widehat{r}(\textbf{x})$ and $\widehat{\textrm{Pr}}(C_1|\textbf{x})$, are not needed in the above process. However, it is immediate to obtain them if the classification costs are available: From (\ref{eq:EquivalentLikelihood}),
+\begin{equation}
+	r_{\textrm{E}}(\textbf{x}) = \frac{d_1(\textbf{x}) p(\textbf{x}|C_1) / a_1}{d_0(\textbf{x}) p(\textbf{x}|C_0) / a_0} = r(\textbf{x}) \frac{d_1(\textbf{x}) / a_1}{d_0(\textbf{x}) / a_0}
+\end{equation}
+and, therefore
+\begin{equation}\label{eq:Likeli_ratio_recovered}
+	\widehat{r}(\textbf{x})  = \frac{\widehat{a}_1}{\widehat{a}_0} \thickspace \frac{d_0(\textbf{x})}{d_1(\textbf{x})} \thickspace \widehat{r}_{\textrm{E}}(\textbf{x}) 
+\end{equation}
+%
+On the other hand, from (\ref{eq:Posterior_prob}),
+\begin{equation}\label{eq:PosteriorProb_recovered}
+\widehat{\textrm{Pr}}(C_1|\textbf{x}) = \frac{1}{1 + \widehat{Q}_{\textrm{P}} / \widehat{r}(\textbf{x})}
+\end{equation}
+%
+Introducing (\ref{eq:Likeli_ratio_recovered}) in (\ref{eq:test_Bayes_1}) leads to 
+\begin{equation}\label{eq:test_Bayes_recovered_1}
+	\widehat{r}(\textbf{x})  \underset{D_0}{\overset{D_1}{\gtrless}} \frac{d_0(\textbf{x})}{d_1(\textbf{x})} \widehat{Q}_{\textrm{P}}
+\end{equation}
+which is the LM version of the Bayes test (\ref{eq:BayesianTest}). The same is obtained when working with (\ref{eq:PosteriorProb_recovered}):
+\begin{equation}\label{eq:test_Bayes_recovered_2}
+	\frac{\widehat{\textrm{Pr}}(C_1|\textbf{x})}{\widehat{\textrm{Pr}}(C_0|\textbf{x})}	  \underset{D_0}{\overset{D_1}{\gtrless}} \frac{d_0(\textbf{x})}{d_1(\textbf{x})} 
+\end{equation}
+
+\section{Experiments and their discussion}\label{Section5}
+
+\subsection{Datasets}
+
+The performance of the benchmark and proposed techniques have been tested with 6 real-world datasets. \textbf{CS1} and \textbf{CS2} are credit-scoring datasets, CS1 was published in the Kaggle competition "Give me Some Credit" in 2011, and CS2 was distributed in the Pacific-Asia Knowledge Discovery and Data Mining Conference (PAKDD) competition in 2009. The pre-processed version of both datasets was obtained from the Costcla repository \cite{costcla}. A direct marketing campaign database, \textbf{MKT}, published on the Machine Learning Repository from the University of California at Irvine \footnote{https://archive.ics.uci.edu/} (UCI) in 2012 \cite{Moro2014}. The pre-processed version was also collected from the Costcla repository. A Home Equity loans dataset, \textbf{HMEQ}, obtained from the website for \cite{Baesens2016} \footnote{http://www.creditriskanalytics.net}. Containing information about the credit card payments of a European bank in September 2013, a Credit Card Fraud dataset, \textbf{CCF}, was distributed by the Université Libre of Brussels on a Kaggle competition called "Credit Card Fraud Detection" in 2017. And finally, an online transaction fraud dataset, \textbf{IEEE-CIS}, was provided by Vesta Corporation in the Kaggle competition called "IEEE-CIS Fraud Detection" in 2019.
+
+{\color{cambios_pre_envio}
+The list of datasets is carefully selected to cover several data characteristics such as low and high imbalance, linear and non-linear borders or complexity, and large and small datasets. The principal characteristics and cost policy for each dataset are detailed in Table \ref{tab:Characteristics_datasets} and Table \ref{tab:cost_policy}.
+}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c c|c c|c c|}
+		\hline
+		\multirow{2}{*}{Dataset} &       \multicolumn{2}{c|}{Samples}        &      \multicolumn{2}{c|}{Dimensions}      &       \multicolumn{2}{c|}{IB Ratio}       \\ \cline{2-7}
+		                         & \multicolumn{1}{c|}{Original} & Processed & \multicolumn{1}{c|}{Original} & Processed & \multicolumn{1}{c|}{Original} & Processed \\ \hline
+		          HMEQ           &             6,485             & 6,485     &              13               & 20        &               4               & 4         \\
+		          MKT            &            45,211             & 37,931    &              20               & 32        &              6.9              & 6.9       \\
+		          CS2            &            38,938             & 38,938    &              20               & 34        &               4               & 4         \\
+		          CS1            &            112,915            & 112,915   &              10               & 10        &             13.8              & 13.8      \\
+		          CCF            &            284,807            & 28,922    &              29               & 29        &             578,9             & 57.8      \\
+		        IEEE-CIS         &            590,540            & 52,172    &              394              & 10        &             28.6              & 32.4      \\ \hline
+	\end{tabular}
+	\caption{\centering{Databases principal characteristics.}}
+	\label{tab:Characteristics_datasets}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Method  & $c_{00}$ & $c_{11}$ &       $c_{10}$        &       $c_{01}$        \\ \hline
+		MKT    &    0     &    1     &           1           &     $max[Amt, 1]$     \\ \hline
+		HMEQ   &    0     &    0     &  $0.15 \: l(\textbf{x})$  &  $0.75 \: l(\textbf{x})$  \\ \hline
+		CS1    &    0     &    0     & $0.75 \: cl(\textbf{x})$  & $b(\textbf{x}) + c_a$ \\ \hline
+		CS2    &    0     &    0     & $0.75 \: cl(\textbf{x})$  & $b(\textbf{x}) + c_a$ \\ \hline
+		CCF    &    0     &    0     & $0.75 \: a(\textbf{x})$ & $0.05 \: a(\textbf{x})$  \\ \hline
+		IEEE-CIS &    0     &    0     & $0.75 \: a(\textbf{x})$ & $0.05 \: a(\textbf{x})$  \\ \hline
+	\end{tabular}
+	\caption{\centering{Databases costs policy}}
+	\label{tab:cost_policy}
+\end{table}
+
+{\color{cambios_pre_envio}
+Regarding the variables from Table \ref{tab:cost_policy}, 
+}for MKT $Amt$ is $0.00615$ times the balance in euros, for HMEQ  $l(\textbf{x})$ is the loan amount, for CCF and IEEE-CIS $a(\textbf{x})$ is the payment and the transaction amount, and for CS2 and CS1 $c_a = 0.75 \: P_1 \: \overline{cl} - P_0 \: \overline{b}$, $cl(\textbf{x})$ being the amount of credit requested and $\overline{cl}$ its average, $b(\textbf{x})$ and $\overline{b}$ are the operation benefit and its average, and $\textbf{x}$ represents a pattern.
+
+\subsection{Figure of merit}
+
+In an EDC classification problem, the goal is to maximize the benefit (or minimize the cost) of the decisions made by the model. The benefits or costs per pattern are specified in the cost policy as explained in section \ref{Section3}. Therefore, it is necessary to use a metric related to the economic impact. The Savings, an extended metric in the literature for EDC problems, will be used in this article. The Savings measure the cost reduction of the model measured against the cost obtained by the best of the trivial decisions. A trivial decision is the one that classifies all the samples as belonging to the class 'i'. In a binary case, we will have two of them, for class 0 and class 1. The cost of the decision of a measured model ``$M$'' over a dataset is
+\begin{equation}\label{eq:Cost_decision}
+Cost(\hat{\textbf{y}}_M) =  \sum_{k \in \mathcal{S}_0} \hat{y}_k c_{10}(\textbf{x}_k) + (1 - \hat{y}_k) c_{00}(\textbf{x}_k) + \sum_{k \in \mathcal{S}_1} (1 - \hat{y}_k) c_{01}(\textbf{x}_k) + \hat{y}_k c_{11}(\textbf{x}_k)
+\end{equation}
+where $\textbf{x}_n$ and $\hat{y}_n\in\{0,1\}$, $n \in \{1,2,...,N\}$, are the patterns and the corresponding decisions of the model ``$M$'' for these patterns, respectively. 
+%
+The Savings of the measured model could be written as
+\begin{equation}\label{eq:Savings}
+Sav(\hat{\textbf{y}}_M) = \frac{Cost_T - Cost(\hat{\textbf{y}}_M)}{Cost_T}
+\end{equation}
+where $Cost_T = \textrm{min}\{Cost(\hat{\textbf{y}}_{T_0}), Cost(\hat{\textbf{y}}_{T_1})\}$ where $\hat{\textbf{y}}_{T_0}$ and $\hat{\textbf{y}}_{T_1}$ are the trivial decisions ($\hat{y}_n=0, \forall n$ and $\hat{y}_n=1,\forall n$, respectively).
+
+\subsection{Experimental details}
+
+When randomly partitioning a dataset into the training and test sets, the selected test may have biases that do not allow a fair comparison between models. To avoid this effect, the experimental results presented in Tables \ref{tab:Bench_all_datasets} and \ref{tab:Proposed-all-datasets} are the average results of 100 partitions (each partition is a training/test split with 75/25\% of the total samples). Where the result of each partition is the mean $\pm$ standard deviation of 100 independent runs over the partition with randomly initialized model weights.
+
+When working with imbalanced data, it is necessary to ensure that the training and test sets have the same imbalance ratio as the original dataset, consequently, the partitions have been generated with stratification of the labels.
+
+The experimental details of the tested models are the following:
+
+\begin{itemize}
+	\item[--] \textbf{Proposed method}. The One-step Cost MLP \textbf{OsC-MLP} is based on an MLP architecture that minimizes \eqref{eq:training_cost} with $c_B(t, o)$ being a Bregman Divergence, in this case, the mean squared error (MSE). It classifies the patterns with \eqref{eq:test_final}, which does not require knowing the classification cost $c_{ji}(\textbf{x})$ for the patterns to be classified, which is useful in problems where these costs are not available in the evaluation phase, as it happens in many real problems. To reduce the degradation produced by IB, a neutral rebalancing process is applied by uniformly weighting the samples of each class. The effect of the RI is characterized in Table \ref{tab:Proposed-all-datasets}.
+	
+	\item[--] \textbf{Benchmark methods}. The one-step methods proposed by Bahnsen and his colleagues are used as benchmarks. These methods were proposed in \cite{Bahnsen2014b}, \cite{Bahnsen2015} and \cite{Bahnsen2015c}. The methods are: Cost-Sensitive Logistic Regressor \textbf{CSLR}, Cost-Sensitive Decision Tree \textbf{CSDT}, and Cost-Sensitive Random Forest \textbf{CSRF}. Each benchmark applies a different model architecture and learns to solve the cost-sensitive classification problem by training the model to optimize a subrogated loss function that is weighted by the cost policy of each sample, although this procedure is not principled.
+	
+	To avoid the degradation produced by the IB, Bahnsen explores the use of 3 techniques to rebalance the data: Cost-proportional over-sampling \textbf{OS}, cost-proportional rejection-sampling \textbf{RS}, and not rebalance \textbf{NR} the data.
+	
+	\item[--] \textbf{Informed method}. Presented in \cite{MediavillaRelano2023}, the Weighting Rebalanced MLP \textbf{WR-MLP} applies a 2-step method: In the first step, a weighted rebalanced MLP probability estimator is used to estimate the likelihood ratio $\hat{r}(\textbf{x})$, and the second stage classify according to \eqref{eq:BayesianTest}, the Bayes EDC likelihood ratio test. Therefore, to classify a sample the WR-MLP needs two inputs, the value of the input variables for the MLP estimator and the cost policy to apply in the Bayes test. Consequently, unlike the benchmarks and the proposed method, the WR-MLP method has the cost policy of the dataset available during the evaluation. This model is useful to have a reference above in performance, to analyze the degradation suffered by the benchmarks and the proposed method from not knowing the cost policy during the evaluation.
+	
+\end{itemize}
+
+The hyperparameters used for the WR-MLP method are those indicated in \cite{MediavillaRelano2023}. For each Benchmark method, the hyperparameters are those recommended in \cite{Bahnsen2014b}. Table \ref{tab:hyperparameters_nn} shows the resulting hyperparameters for the OsC-MLP model discovered with a 5-fold (100 runs per fold) cross-validation over the 100 partitions. The optimizer of the MLPs is the Root Mean Square Propagation, RMSProp. An extra column with the size of the hidden layer of the WR-MLP method proves that integrating the estimation of the posterior probabilities and costs in a single model requires a higher expressive capacity than only estimating the posterior probabilities. All datasets meet this rule except for MKT because it has a quasi-linear boundary. In HMEQ, the cross-validation indicates that the number of neurons needed is greater than 150, but it is saturated with this value since the number of samples is not enough to train larger networks.
+
+\begin{table}[htpb]
+	\resizebox{\textwidth}{!}{
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			 Method  & Activation & Batch size &    Learning rate    & Momentum & Neurons (OsC-MLP) & Neurons (WR-MLP) \\ \hline
+			  MKT    &    Tanh    &     60     & $1.5 \cdot 10^{-4}$ &   0.25   &         2         &        2         \\ \hline
+			  HMEQ   &    ReLU    &    100     &  $4 \cdot 10^{-4}$  &   0.02   &        150        &       150        \\ \hline
+			  CS1    &    ReLU    &     80     &  $8 \cdot 10^{-3}$  &   0.02   &        15         &        10        \\ \hline
+			  CS2    &    ReLU    &     20     &  $6 \cdot 10^{-4}$  &   0.5    &         7         &        5         \\ \hline
+			  CCF    &    ReLU    &     50     &  $5 \cdot 10^{-4}$  &   0.0    &        90         &        60        \\ \hline
+			IEEE-CIS &    ReLU    &     40     & $2.5 \cdot 10^{-4}$ &   0.0    &        25         &        20        \\ \hline
+		\end{tabular}}
+	\caption{\centering{Hyperparameters of the Neural Networks used for the proposed OsC-MLP method.}}
+	\label{tab:hyperparameters_nn}
+\end{table}
+
+\subsection{Experimental results}
+
+This section presents the experimental results for the benchmarks and proposed method on the 6 real-world datasets. All the tables will mark in \textbf{bold} the highest Savings score and, in \textit{italic}, the statistically equivalent (the score is contained in the range of, mean $\pm$ the standard deviation, from the best performance) results. The Tables \ref{tab:Bench_all_datasets} and \ref{tab:Proposed-all-datasets} present the results for the benchmark and the proposed methods.
+
+\begin{table}[htpb]
+	\resizebox{\textwidth}{!}{
+		\centering
+		\begin{tabular}{|cc|c|c|l|l|l|l|}
+			\hline
+			\multicolumn{2}{|c|}{Benchmark}                                               &  \multirow{2}{*}{MKT}   &  \multirow{2}{*}{HMEQ}  & \multirow{2}{*}{CS2}    & \multirow{2}{*}{CS1}    & \multirow{2}{*}{CCF}    & \multirow{2}{*}{IEEE-CIS} \\ \cline{1-2}
+			       \multicolumn{1}{|l|}{Method}         & \multicolumn{1}{l|}{Resampling} &                         &                         &                         &                         &                         &                           \\ \hline
+			\multicolumn{1}{|c|}{\multirow{3}{*}{CSLR}} &               NR                &    -29.5 $\pm$ 22.0     &     16.5 $\pm$ 3.6      & -38.7 $\pm$ 25.1        & -1.4 $\pm$ 10.0         & -92.3 $\pm$ 61.3        & -48.3 $\pm$ 46.9          \\
+			          \multicolumn{1}{|c|}{}            &               OS                &    -28.9 $\pm$ 22.1     &      14.2 $\pm$ 3.      & -34.3 $\pm$ 24.5        & 1.6 $\pm$ 2.1           & -82.0 $\pm$ 63.0        & -48.0 $\pm$ 46.9          \\
+			          \multicolumn{1}{|c|}{}            &               RS                &    -28.5 $\pm$ 22.1     &     14.0 $\pm$ 3.7      & -34.2 $\pm$ 24.5        & 2.3 $\pm$ 2.2           & -72.2 $\pm$ 61.9        & -47.8 $\pm$ 46.8          \\ \hline
+			\multicolumn{1}{|c|}{\multirow{3}{*}{CSDT}} &               NR                & \textbf{47.3 $\pm$ 0.0} & \textbf{64.8 $\pm$ 0.0} & \textbf{28.2 $\pm$ 0.0} & \textit{48.0 $\pm$ 0.0} & 69.8 $\pm$ 0.0          & \textit{22.1 $\pm$ 0.0}   \\
+			          \multicolumn{1}{|c|}{}            &               OS                &     39.6 $\pm$ 0.0      &      2.0 $\pm$ 0.0      & 16.9 $\pm$ 0.0          & -8.2 $\pm$ 0.0          & 69.6 $\pm$ 0.0          & 3.4 $\pm$ 0.0             \\
+			          \multicolumn{1}{|c|}{}            &               RS                &     37.5 $\pm$ 1.7      &      1.8 $\pm$ 1.2      & 14.0 $\pm$ 2.1          & -8.9 $\pm$ 0.4          & \textbf{72.6 $\pm$ 2.8} & -2.0 $\pm$ 2.3            \\ \hline
+			\multicolumn{1}{|c|}{\multirow{3}{*}{CSRF}} &               NR                &     33.2 $\pm$ 10.4     &     60.9 $\pm$ 3.4      & 9.8 $\pm$ 7.7           & \textbf{48.5 $\pm$ 1.4} & \textit{71.5 $\pm$ 3.0} & \textbf{23.4 $\pm$ 2.1}   \\
+			          \multicolumn{1}{|c|}{}            &               OS                &      1.0 $\pm$ 5.1      &      0.1 $\pm$ 0.4      & 12.3 $\pm$ 7.1          & -9.0 $\pm$ 0.3          & \textbf{72.6 $\pm$ 2.4} & 6.4 $\pm$ 3.1             \\
+			          \multicolumn{1}{|c|}{}            &               RS                &      0.8 $\pm$ 4.6      &      0.1 $\pm$ 0.3      & 13.0 $\pm$ 6.9          & -9.2 $\pm$ 0.1          & 68.7 $\pm$ 3.0          & -0.9 $\pm$ 4.4            \\ \hline
+		\end{tabular}}
+	\caption{\centering{Test Savings (average of the mean results of each partition $\pm$ average of the standard deviations of the results of each partition, in \%) for the 6 databases using the benchmark methods}.}
+	\label{tab:Bench_all_datasets}
+\end{table}
+
+Analyzing the benchmark results from Table \ref{tab:Bench_all_datasets}, the NT, OS and RS based CSLR models obtain poor results for all the tested datasets. The NT-CSDT gets the best performance for MKT, HMEQ, and CS2 datasets. Also, NT-CSDT is the second benchmark in CS1 and IEEE-CIS datasets. The OS-CSDT method is the second on MKT and CS2 datasets and shows competitive results for CCF. The benchmark RS-CSDT gets the best performance for the CCF dataset. Likewise, the NT-CSRF method is the best benchmark in CS1 and IEEE-CIS datasets and has the second position in the CCF and HMEQ datasets. The benchmark OS-CSRF gets the best results for the CCF database. And finally, RS-CSDT obtains competitive results for the CCF dataset. Regarding the rebalancing process, over the dataset CCF, all the benchmarks get an advantage when using a re-sampling technique. Also for the CS2 dataset, the benchmarks based on CSDT get better results when rebalance is applied. For the rest of the datasets, the best performance is obtained from the NR approach.
+
+\begin{table}[htpb]
+	
+	\begin{minipage}{.53\linewidth}
+		\centering
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em} 
+			\multicolumn{3}{|c|}{MKT}           \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSDT): 47.3 $\pm$ 0.0}                                                              \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
+			\centering{0.5}                                                      & \textit{49.1 $\pm$ 0.4} & \textit{49.0 $\pm$ 0.4} \\ \hline
+			\centering{1 (Full RB)}                                              & \textbf{49.2 $\pm$ 0.4} & \textit{49.1 $\pm$ 0.4} \\ \hline
+			\centering{2}                                                        & \textit{49.1 $\pm$ 0.4} & \textbf{49.2 $\pm$ 0.5} \\ \hline
+			\centering{4}                                                        & \textit{49.1 $\pm$ 0.5} & \textit{48.9 $\pm$ 0.8} \\ \hline
+			\centering{6.9  (Orig IB)}                                           & \textit{49.1 $\pm$ 0.5} &     48.4 $\pm$ 1.1      \\ \hline
+		\end{tabular}}
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em} 
+			\multicolumn{3}{|c|}{CS1}           \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSRF): 48.5 $\pm$ 1.4}                                                              \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
+			\centering{1 (Full RB)}                                              & 50.5 $\pm$ 0.5          & \textit{50.6 $\pm$ 0.9} \\ \hline
+			\centering{2}                                                        & \textbf{50.7 $\pm$ 0.1} & \textit{50.6 $\pm$ 0.8} \\ \hline
+			\centering{4}                                                        & \textbf{50.7 $\pm$ 0.1} & \textbf{50.7 $\pm$ 0.9} \\ \hline
+			\centering{8}                                                        & 50.5 $\pm$ 0.1          & \textit{50.4 $\pm$ 1.0} \\ \hline
+			\centering{\mbox{13.8  (Orig IB)}}                                   & 49.5 $\pm$ 0.4          & \textit{49.9 $\pm$ 1.1} \\ \hline
+		\end{tabular}}
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em}  
+			\multicolumn{3}{|c|}{CCF}          \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSRF-OS): 72.6 $\pm$ 2.4}                                                           \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
+			\centering{1 (Full RB)}                                              & \textit{76.6 $\pm$ 1.7} & \textit{76.5 $\pm$ 1.7} \\ \hline
+			\centering{2}                                                        & \textit{76.9 $\pm$ 2.0} & \textit{77.0 $\pm$ 2.0} \\ \hline
+			\centering{4}                                                        & \textbf{77.1 $\pm$ 2.2} & \textit{77.3 $\pm$ 2.2} \\ \hline
+			\centering{8}                                                        & \textit{76.9 $\pm$ 2.4} & \textbf{77.4 $\pm$ 2.4} \\ \hline
+			\centering{16}                                                       & \textit{76.3 $\pm$ 2.6} & \textit{77.3 $\pm$ 2.7} \\ \hline
+			\centering{32}                                                       & \textit{76.1 $\pm$ 2.3} & \textit{77.2 $\pm$ 2.8} \\ \hline
+			\centering{\mbox{57.8 (Orig IB)}}                                    & \textit{75.7 $\pm$ 2.2} & \textit{77.0 $\pm$ 2.7} \\ \hline
+		\end{tabular}}
+	\end{minipage}
+	\begin{minipage}{.53\linewidth}
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em} 
+			\multicolumn{3}{|c|}{HMEQ}          \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSDT): 64.8 $\pm$ 0.0}                                                              \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
+			\centering{1 (Full RB)}                                              & 73.0 $\pm$ 1.5          &     73.9 $\pm$ 1.7      \\ \hline
+			\centering{2}                                                        & \textit{74.7 $\pm$ 1.6} & \textit{74.7 $\pm$ 1.7} \\ \hline
+			\centering{4  (Orig IB)}                                             & \textbf{75.3 $\pm$ 1.6} & \textbf{75.9$\pm$ 1.7}  \\ \hline
+			\centering{6}                                                        & \textit{75.2 $\pm$ 1.8} & \textit{75.8 $\pm$ 1.6} \\ \hline
+			\centering{8}                                                        & \textit{75.1 $\pm$ 1.9} & \textit{75.7 $\pm$ 1.6} \\ \hline
+		\end{tabular}}
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em} 
+			\multicolumn{3}{|c|}{CS2}           \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSDT): 28.2 $\pm$ 0.0}                                                              \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP \mbox{(2-step)}}  &         OsC-MLP         \\ \hline
+			\centering{0.25}                                                     & \textit{30.9 $\pm$ 0.5} &     30.4 $\pm$ 0.8      \\ \hline
+			\centering{0.5}                                                      & \textit{31.3 $\pm$ 0.5} & \textit{31.0 $\pm$ 0.7} \\ \hline
+			\centering{1  (Full RB)}                                             & \textbf{31.4 $\pm$ 0.6} & \textit{31.3 $\pm$ 0.7} \\ \hline
+			\centering{2}                                                        & \textit{31.3 $\pm$ 0.6} & \textbf{31.4 $\pm$ 0.6} \\ \hline
+			\centering{4  (Orig IB)}                                             & \textit{31.2 $\pm$ 0.7} & \textit{31.3 $\pm$ 0.7} \\ \hline
+		\end{tabular}}
+		\resizebox{\size\textwidth}{!}{
+		\begin{tabular}{|p{2.5cm}|p{2.0cm}|c|}
+			\specialrule{.2em}{.1em}{.1em} 
+			\multicolumn{3}{|c|}{IEEE-CIS}      \\ \hline
+			\multicolumn{3}{|c|}{Best benchmark (CSRF): 23.4 $\pm$ 2.1}                                                              \\ \hline
+			\noindent\parbox[c]{\hsize}{\centering{IB after \mbox{rebalancing}}} & \centering{WR-MLP  \mbox{(2-step)}} &         OsC-MLP         \\ \hline
+			\centering{1 (Full RB)}                                              & \textit{25.2 $\pm$ 2.8} & \textit{29.0 $\pm$ 2.6} \\ \hline
+			\centering{2}                                                        & \textit{26.2 $\pm$ 2.8} & \textbf{29.5 $\pm$ 2.6} \\ \hline
+			\centering{4}                                                        & \textbf{26.1 $\pm$ 2.7} & \textit{29.4 $\pm$ 2.7} \\ \hline
+			\centering{8}                                                        & \textit{25.2 $\pm$ 2.6} & \textit{28.8 $\pm$ 2.8} \\ \hline
+			\centering{16}                                                       & \textit{24.0 $\pm$ 2.5} & \textit{27.3 $\pm$ 2.8} \\ \hline
+			\centering{\mbox{29.4 (Orig IB)}}                                    & 22.8 $\pm$ 2.7          &     25.9 $\pm$ 2.9      \\ \hline
+		\end{tabular}}
+	\end{minipage}
+	\caption{\centering{Test Savings (average of the mean results of each partition $\pm$ average of the standard deviations of the results of each partition, in \%) for all the databases using WR-MLP and proposed OsC-MLP method with several rebalance intensities}.}
+	\label{tab:Proposed-all-datasets}
+\end{table}
+
+The proposed method OsC-MLP upgrades the performance of the best benchmark for all the tested datasets, by advantage of 4\% $-$1.9 of Savings$-$ on MKT, by 17.1\% $-$11.1 of Savings$-$ on HMEQ, by 4.5\% $-$2.2 of Savings$-$ on CS1, with a distance of 11.3\% $-$3.2 of Savings$-$ on CS2, by 6.6\% $-$4.8 of Savings$-$ on CCF, and by 26.1\% $-$6.1 of Savings$-$ on IEEE-CIS. Also, despite the disadvantage of not knowing the prediction example-dependent costs, the OsC-MLP method matches the results of the informed WR-MLP method for all the datasets, except for IEEE-CIS where the proposed method even upgrades the performance of the WR-MLP method by 13\% $-$3.4 of Savings$-$. All the mentioned advantages are statistically significant since the differences are higher than the standard deviation value. The MKT, CS1, CS2, CCF, and IEEE-CIS datasets get an advantage when rebalancing the problem with a fixed RI value. However, HMEQ gets the maximum results when no rebalance is applied.
+
+To assess the statistical significance of the results obtained with the proposed method against the benchmark methods, Table \ref{tab:TTestWilcoxon} shows the result of two statistical tests that are commonly used to compare two classifiers, the paired T-test and the Wilcoxon signed-ranks test \cite{Demsar2006}. The $p$-value and the result of the hypothesis that the mean difference between two sets of observations is not zero for a statistical significance of 5\% are presented in a paired comparison of every benchmark method against the proposed OsC-MLP method. It can be seen that the hypothesis is true for all methods in both the T-test and the Wilcoxon test.
+
+\begin{table}[htpb]
+	\begin{center}
+		\begin{tabular}{c|cc}
+			\hline
+			\hline
+			Benchmark Method &\begin{tabular}{c}
+				   T-Test     \\
+				$p$-value (H)
+			\end{tabular} & \begin{tabular}{c}Wilcoxon\\$p$-value (H)\end{tabular} \\
+			\hline
+			CSLR      & 0.0048 (1) & 0.0312 (1) \\
+			CSLR (OS) & 0.0038 (1) & 0.0312 (1) \\
+			CSLR (RS) & 0.0027 (1) & 0.0312 (1) \\ 
+			CSDT      & 0.0123 (1) & 0.0312 (1) \\
+			CSDT (OS) & 0.0386 (1) & 0.0312 (1) \\
+			CSDT (RS) & 0.0333 (1) & 0.0312 (1) \\
+			CSRF      & 0.0148 (1) & 0.0312 (1) \\
+			CSRF (OS) & 0.0179 (1) & 0.0312 (1) \\
+			CSRF (RS) & 0.0120 (1) & 0.0312 (1) \\
+			\hline
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{\centering{T-Test and Wilcoxon signed ranked test ($p$-Values and Hypothesis) of the proposed OsC-MLP method against each one of the benchmark methods.}}
+	\label{tab:TTestWilcoxon}
+\end{table}
+
+A multiple model comparison has also been performed between the proposed method and CSDT and CSRF (CSLR has not been included in the comparison because this method has not obtained the best result in any dataset). For the sake of simplicity in the comparison, for CSDT and CSRF, the best sampling scheme for each dataset has been considered: CSDT$^\ast$ denotes the set of results that includes the best result of CSDT, CSDT (OS) and CSDT (RS) for each dataset (and similarly does CSRF$^\ast$). Figure \ref{fig:FriedmanTest} plots the means of ranks with the range of two standard deviations in the pairwise comparison for a Friedman test. The proposed method has the best average rank (it obtained the best result in all datasets). As seen in  \cite{Demsar2006}, several procedures have been proposed in the literature to analyze the statistical significance of the comparison. Table \ref{tab:pValuesFriedman} includes the $p$-values in a multiple-comparison using different types of criteria to define the critical values. Tukey's Honestly Significant Difference (HSD), Bonferroni method, Scheffe's procedure and Fisher's Least Significant Difference (LSD) procedure have been considered. The $p$-values obtained in the pairwise comparison using these criteria show in all cases that the proposed method is significantly different from the two benchmark methods (with 5\% of significance to discard the null hypothesis that the methods are equivalent). The performance of the two benchmark methods is in all cases seen as statistically equivalent.
+
+\begin{figure}[htpb]
+	\tikzstyle{estiloCirculo}=[x radius=0.05cm, y radius=0.15cm]
+	\tikzstyle{estiloFig}=[xscale=3.0, yscale=1.0]
+	\def\desvEst{0.3997}
+	\begin{center}
+		\begin{tikzpicture}[estiloFig]
+		\draw[thin] (0,0) -- (4,0);
+		\foreach \x in{0,1,...,4}{
+			\draw[thin] (\x,0.2) -- (\x,-0.2) node[below] {$\x$};
+		}
+		\foreach \y/\x/\nombre in{0/3.0/OsC-MLP, 
+			1/1.5833/CSDT$^\ast$,
+			2/1.4167/CSRF$^\ast$
+		}
+		{
+			\draw[ultra thick,black] ({\x-\desvEst},{0.5*(3-\y)}) -- ({\x+\desvEst},{0.5*(3-\y)}) node[right] {\nombre};
+			\draw[ultra thick,black] (\x,{0.5*(3-\y)}) circle[estiloCirculo];
+		}
+		\end{tikzpicture}
+	\end{center}
+	\caption{\centering{Average means of ranks for the 3 methods in a Friedman test  (better models: on the right). The standard deviation in the pairwise comparison is included.}}
+	\label{fig:FriedmanTest}
+\end{figure}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{c|ccc}
+			\hline\hline
+			\begin{tabular}{@{}c@{}}Type of\\ Critical\\ Value\end{tabular} 
+  & \begin{tabular}{@{}c@{}}OsC-MLP\\ vs\\ CSDT$^\ast$\end{tabular} 
+  & \begin{tabular}{@{}c@{}}OsC-MLP\\ vs\\ CSRF$^\ast$\end{tabular}
+  & \begin{tabular}{@{}c@{}}CSDT$^\ast$ \\vs\\ CSRF$^\ast$ \end{tabular}
+ \\ \hline
+			       Tukey's         &         0.0323          &         0.0141          &           0.9532           \\
+			      Bonferroni       &         0.0366          &         0.0153          &            1.0             \\
+			       Scheffe         &         0.0432          &         0.0198          &           0.9575           \\
+			         LSD           &         0.0122          &         0.0051          &           0.7681           \\ \hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{\centering{$p$-values of the statistics of the Friedman test in a multiple model comparison using different types of critical values.}}
+	\label{tab:pValuesFriedman}
+\end{table}
+
+\section{Conclusions and further work}\label{Section6}
+
+{\color{cambios_v2}
+As introduced in Section \ref{Section2}, the state-of-the-art methods that achieve the best performance in EDC classification problems use principled procedures that manage the classification costs and imbalance with the Bayes test. However, these methods present an important imitation as they need to know the decision costs for unseen samples. 
+
+We have presented the OsC-MLP method, a one-step procedure that also manages the classification costs and imbalance with the Bayes test, but with a modified formulation to learn the decision costs during the training phase, i.e., only need the costs for the training samples, solving the main limitation of the state-of-the-art alternatives. The OsC-MLP method works with an auxiliary likelihood ratio which includes the training example dependent costs, as well as principled rebalancing mechanisms that use neutral procedures under Bregman surrogate training costs. Therefore, we not only can classify new samples without knowing or estimating the corresponding decision costs but the negative effects of any kind of imbalance can be appropriately controlled.
+}
+
+A set of experiments with real datasets has shown that the proposed OsC-MLP method obtains better results than the one-step benchmark methods, which do not require the decision costs to evaluate a pattern. Moreover, the OsC-MLP is able of achieving the performance of informed methods, which need the decision costs for patterns at the evaluation stage. This is a significant result because these costs are not available during the evaluation phase for previously unseen patterns in many real applications. {\color{cambios_v2}
+However, since the proposed OsC-MLP method uses Neural Networks as an estimator, the proposal has its same drawbacks. Although neural networks offer excellent estimation capabilities, they also have some limitations: Difficulties with datasets with linear decision boundaries; As a "black-box" model, it is complex to explain its decisions; And finally, large datasets are needed to train models with high expressive capacity. Such as in the HMEQ dataset, where the number of neurons was limited to 150 due to the amount of available data.
+}
+
+At present, we are working on including sample emphasis mechanisms to improve the performance of these algorithms.
+
+\section*{Acknowledgments}
+
+In memoriam of An\'ibal R. Figueiras-Vidal, who passed away recently. Prof. Figueiras-Vidal collaborated actively with the authors for several years, and we want to recognize his contribution: An important part of this work is due to his contribution and guidance.
+
+This work has been partially supported by Grant PID2021-125652OB (ML-SAM) of the Spanish Ministry of Science and Innovation.
+
+\vskip 0.2in
+%\bibliographystyle{elsarticle-harv}\biboptions{authoryear}
+\bibliographystyle{elsarticle-num}%\biboptions{number}
+\bibliography{BiblioING}
+
+
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
